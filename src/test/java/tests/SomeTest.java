@@ -1,41 +1,60 @@
 package tests;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import pages.LoginPage;
+import pages.MainPage;
 
-import java.util.concurrent.TimeUnit;
+import static java.lang.Thread.sleep;
 
+public class SomeTest extends BaseTest {
 
-public class SomeTest {
-
-    private final Logger LOG = LogManager.getLogger("Web driver test");
-
-    private WebDriver driver;
+    private LoginPage loginPage;
+    private MainPage mainPage;
+    private String runAfter = "Yes";
 
     @Before
-    public void Before() {
-        System.setProperty("webdriver.chrome.driver",
-                System.getProperty("user.dir") +
-                        "\\src\\main\\resources\\drivers\\chrome\\v84\\chromedriver.exe");
-        driver = new ChromeDriver();
+    public void init() {
+        this.loginPage = new LoginPage(this.driver);
+        this.mainPage = new MainPage(this.driver);
     }
 
     @Test
-    public void someTest() {
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("https://qalight.com.ua/o-nas/qalight-eto/");
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            LOG.error(e);
-        }
-        driver.quit();
+    public void negativeAuthLogin() {
+        this.loginPage.login("TestUser", "TestPassword");
+        Assert.assertEquals("Incorrect username or password.", driver.findElement(this.loginPage.getErrorMessage()).getText());
+        this.runAfter = "No";
     }
 
+    @Test
+    public void positiveAuthLogin() {
+        this.loginPage.login();
+        Assert.assertTrue(driver.getPageSource().contains(this.loginPage.getSuccessMessage()));
+    }
+
+    @Test
+    public void checkProject() {
+
+        try {
+            this.loginPage.login();
+            sleep(1000);
+            this.mainPage.githubTitle();
+            this.mainPage.changeBranch();
+            sleep(1000);
+            this.mainPage.gitopenFile();
+            Assert.assertEquals(this.mainPage.getExpectedSeleniumVersion(),this.mainPage.getSeleniumVersion());
+            sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    @After
+    public void finalActions() {
+        if (this.runAfter == "Yes") {
+            this.mainPage.logOffFromGit();
+            Assert.assertTrue(driver.getPageSource().contains(this.mainPage.getSignOutMessage()));
+        }
+    }
 }
