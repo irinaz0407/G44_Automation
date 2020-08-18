@@ -52,7 +52,7 @@ public class SomeTest extends BaseTest {
     }
     @After
     public void finalActions() {
-        if (this.runAfter == "Yes") {
+        if (this.runAfter.equals("Yes")) {
             this.mainPage.logOffFromGit();
             Assert.assertTrue(driver.getPageSource().contains(this.mainPage.getSignOutMessage()));
         }
