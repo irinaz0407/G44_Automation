@@ -1,21 +1,15 @@
 package pages;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class MainPage extends BasePage {
 
     public MainPage(WebDriver driver) {
         super(driver);
+        changeLogger("MainPage ");
     }
-
-    protected final Logger log = LogManager.getLogger("Main Page");
-
 
     private final By githubProject = By.partialLinkText("G44_Automation");
     private final By githubBranchName = By.id("branch-select-menu");
@@ -74,11 +68,6 @@ public class MainPage extends BasePage {
 
     public String getExpectedSeleniumVersion(){
         return seleniumVer;
-    }
-
-    private void validateTrue(WebElement element) {
-        log.debug("Check element:" + element);
-        Assert.assertTrue(element.isEnabled());
     }
 
 }

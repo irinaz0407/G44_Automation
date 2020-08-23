@@ -1,15 +1,9 @@
 package pages;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage{
-
-    protected final Logger log = LogManager.getLogger("Login Page");
 
     private final By usernameField = By.id("login_field");
     private final By passwordField = By.id("password");
@@ -20,7 +14,7 @@ public class LoginPage extends BasePage{
 
     public LoginPage(WebDriver driver){
         super(driver);
-
+        changeLogger("Login Page");
     }
     public void login(){
         validateTrue(this.driver.findElement(usernameField));
@@ -42,11 +36,11 @@ public class LoginPage extends BasePage{
 
     }
 
-    private void validateTrue(WebElement element) {
-        log.debug("Check element:" + element);
-        Assert.assertTrue(element.isEnabled());
+ //   private void validateTrue(WebElement element) {
+ //       log.debug("Check element:" + element);
+ //       Assert.assertTrue(element.isEnabled());
 //        log.debug("Test finished");
-    }
+   // }
     public By getErrorMessage(){
         return errorMessage;
     }
