@@ -3,7 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
     private final By usernameField = By.id("login_field");
     private final By passwordField = By.id("password");
@@ -12,11 +12,12 @@ public class LoginPage extends BasePage{
     private final By successHead = By.xpath("//h2[@class = 'shelf-title']");
     private final String successMessage = "Learn Git and GitHub without any code!";
 
-    public LoginPage(WebDriver driver){
+    public LoginPage(WebDriver driver) {
         super(driver);
         changeLogger("Login Page");
     }
-    public void login(){
+
+    public void login() {
         validateTrue(this.driver.findElement(usernameField));
         validateTrue(this.driver.findElement(passwordField));
         validateTrue(this.driver.findElement(signInButton));
@@ -28,7 +29,7 @@ public class LoginPage extends BasePage{
 
     }
 
-    public void login(String username, String password){
+    public void login(String username, String password) {
 
         this.driver.findElement(usernameField).sendKeys(username);
         this.driver.findElement(passwordField).sendKeys(password);
@@ -36,15 +37,16 @@ public class LoginPage extends BasePage{
 
     }
 
- //   private void validateTrue(WebElement element) {
- //       log.debug("Check element:" + element);
- //       Assert.assertTrue(element.isEnabled());
+    //   private void validateTrue(WebElement element) {
+    //       log.debug("Check element:" + element);
+    //       Assert.assertTrue(element.isEnabled());
 //        log.debug("Test finished");
-   // }
-    public By getErrorMessage(){
+    // }
+    public By getErrorMessage() {
         return errorMessage;
     }
-    public String getSuccessMessage(){
+
+    public String getSuccessMessage() {
         return successMessage;
     }
 }

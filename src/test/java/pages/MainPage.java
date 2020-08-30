@@ -34,23 +34,23 @@ public class MainPage extends BasePage {
         driver.findElement(branchName).click();
     }
 
-    public void gitopenFile(){
+    public void gitopenFile() {
         validateTrue(driver.findElement(fileLink));
         driver.findElement(fileLink).click();
     }
 
-    public String getSeleniumVersion(){
+    public String getSeleniumVersion() {
         String str;
         String newElId;
         validateTrue(driver.findElement(selElement));
         log.debug("Found!!!");
         str = driver.findElement(selElement).getAttribute("id");
-        log.debug("Element id ="+str);
-        newElId = "LC"+(Integer.parseInt(str.substring(2,str.length()))+1) ;
-        log.debug("New element id ="+newElId);
+        log.debug("Element id =" + str);
+        newElId = "LC" + (Integer.parseInt(str.substring(2, str.length())) + 1);
+        log.debug("New element id =" + newElId);
         versionElement = new By.ById(newElId);
-        newElId = driver.findElement(versionElement).getText().replace(" ","").replace("<version>","").replace("</version>","");
-        log.debug("Selenium version is "+newElId);
+        newElId = driver.findElement(versionElement).getText().replace(" ", "").replace("<version>", "").replace("</version>", "");
+        log.debug("Selenium version is " + newElId);
         return newElId;
     }
 
@@ -62,11 +62,11 @@ public class MainPage extends BasePage {
 
     }
 
-    public String getSignOutMessage(){
-        return  gitNotSignedIn;
+    public String getSignOutMessage() {
+        return gitNotSignedIn;
     }
 
-    public String getExpectedSeleniumVersion(){
+    public String getExpectedSeleniumVersion() {
         return seleniumVer;
     }
 

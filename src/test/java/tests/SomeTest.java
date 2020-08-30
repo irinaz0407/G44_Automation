@@ -11,7 +11,7 @@ import static java.lang.Thread.sleep;
 public class SomeTest extends BaseTest {
 
     private String runAfter = "Yes";
-    private LoginPage loginPage;
+    private LoginPage loginPage; //экземпляр класса
     private MainPage mainPage;
     private SearchPage searchPage;
     private TabsPage tabsPage;
@@ -19,7 +19,7 @@ public class SomeTest extends BaseTest {
 
     @Before
     public void init() {
-        this.loginPage = new LoginPage(this.driver);
+        this.loginPage = new LoginPage(this.driver); //экземпляр класса
         this.mainPage = new MainPage(this.driver);
         this.searchPage = new SearchPage(this.driver);
         this.tabsPage = new TabsPage(this.driver);
