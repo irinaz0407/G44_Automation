@@ -9,8 +9,9 @@ public class LoginPage extends BasePage {
     private final By passwordField = By.id("password");
     private final By signInButton = By.name("commit");
     private final By errorMessage = By.xpath("//div[@class ='container-lg px-2']");
-    private final By successHead = By.xpath("//h2[@class = 'shelf-title']");
-    private final String successMessage = "Learn Git and GitHub without any code!";
+    private final By exitMenu = By.xpath("//summary[@aria-label='View profile and more']");
+    //private final String successMessage = "Learn Git and GitHub without any code!";
+    //private final By successHead = By.xpath("//h2[@class = 'shelf-title']");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -25,7 +26,8 @@ public class LoginPage extends BasePage {
         this.driver.findElement(usernameField).sendKeys(System.getProperty("userName"));
         this.driver.findElement(passwordField).sendKeys(System.getProperty("password"));
         this.driver.findElement(signInButton).click();
-        validateTrue(this.driver.findElement(successHead));
+        validateTrue(this.driver.findElement(exitMenu));
+        // validateTrue(this.driver.findElement(successHead));
 
     }
 
@@ -46,7 +48,7 @@ public class LoginPage extends BasePage {
         return errorMessage;
     }
 
-    public String getSuccessMessage() {
-        return successMessage;
+    public boolean getexitMenu() {
+        return driver.findElement(exitMenu).isEnabled();
     }
 }

@@ -1,4 +1,4 @@
-package tests;
+package tests.ui;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -36,7 +36,7 @@ public class SomeTest extends BaseTest {
     @Test
     public void positiveAuthLogin() {
         this.loginPage.login();
-        Assert.assertTrue(driver.getPageSource().contains(this.loginPage.getSuccessMessage()));
+        Assert.assertTrue(loginPage.getexitMenu());
     }
 
     @Test

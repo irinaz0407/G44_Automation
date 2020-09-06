@@ -46,7 +46,7 @@ public class MainPage extends BasePage {
         log.debug("Found!!!");
         str = driver.findElement(selElement).getAttribute("id");
         log.debug("Element id =" + str);
-        newElId = "LC" + (Integer.parseInt(str.substring(2, str.length())) + 1);
+        newElId = "LC" + (Integer.parseInt(str.substring(2)) + 1);
         log.debug("New element id =" + newElId);
         versionElement = new By.ById(newElId);
         newElId = driver.findElement(versionElement).getText().replace(" ", "").replace("<version>", "").replace("</version>", "");
@@ -59,7 +59,6 @@ public class MainPage extends BasePage {
         driver.findElement(exitMenu).click();
         validateTrue(driver.findElement(signOutLink));
         driver.findElement(signOutLink).click();
-
     }
 
     public String getSignOutMessage() {

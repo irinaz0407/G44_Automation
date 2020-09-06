@@ -1,4 +1,4 @@
-package tests;
+package tests.ui;
 
 import com.evaluation.Evaluation;
 import org.junit.Test;
