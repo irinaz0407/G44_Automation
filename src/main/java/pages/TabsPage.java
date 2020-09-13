@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class TabsPage extends BasePage {
 
     private final By tabsSearch = By.xpath("//span[@data-content]");
 
+    @Step("Validate Tabs on Main Page")
     public void printTabs() {
         validateTrue(this.driver.findElement(tabsSearch));
         List<WebElement> elList = driver.findElements(tabsSearch);

@@ -1,6 +1,7 @@
 package pages;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -22,23 +23,26 @@ public class MainPage extends BasePage {
     private final By signOutLink = By.xpath("//button[contains(text(),'Sign out')]");
     private final String gitNotSignedIn = "Built for developers";
 
-
+    @Step("Navigate to Project G44_Automation.")
     public void githubTitle() {
         validateTrue(driver.findElement(githubProject));
         driver.findElement(githubProject).click();
     }
 
+    @Step("Change to branch irinaz-local.")
     public void changeBranch() {
         //validateTrue(driver.findElement(githubProject));
         driver.findElement(githubBranchName).click();
         driver.findElement(branchName).click();
     }
 
+    @Step("Find and open pom.xml.")
     public void gitopenFile() {
         validateTrue(driver.findElement(fileLink));
         driver.findElement(fileLink).click();
     }
 
+    @Step("Get version # for package fo selenium driver.")
     public String getSeleniumVersion() {
         String str;
         String newElId;
@@ -54,6 +58,7 @@ public class MainPage extends BasePage {
         return newElId;
     }
 
+    @Step("LogOff from Git.")
     public void logOffFromGit() {
         validateTrue(driver.findElement(exitMenu));
         driver.findElement(exitMenu).click();

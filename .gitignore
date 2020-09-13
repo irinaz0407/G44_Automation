@@ -2,3 +2,6 @@ target
 .idea
 *.iml
 *.exe
+/src/test/resources/connection.properties
+/.allure/
+/allure-results/

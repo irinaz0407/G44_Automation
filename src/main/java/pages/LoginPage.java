@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,19 +19,20 @@ public class LoginPage extends BasePage {
         changeLogger("Login Page");
     }
 
+    @Step("Check all elements on login page.")
     public void login() {
+
+
         validateTrue(this.driver.findElement(usernameField));
         validateTrue(this.driver.findElement(passwordField));
         validateTrue(this.driver.findElement(signInButton));
-
-        this.driver.findElement(usernameField).sendKeys(System.getProperty("userName"));
-        this.driver.findElement(passwordField).sendKeys(System.getProperty("password"));
-        this.driver.findElement(signInButton).click();
+        this.login(this.connProps.getProperty("git.username"), this.connProps.getProperty("git.password"));
         validateTrue(this.driver.findElement(exitMenu));
         // validateTrue(this.driver.findElement(successHead));
 
     }
 
+    @Step("Login as user {0}")
     public void login(String username, String password) {
 
         this.driver.findElement(usernameField).sendKeys(username);
@@ -39,11 +41,6 @@ public class LoginPage extends BasePage {
 
     }
 
-    //   private void validateTrue(WebElement element) {
-    //       log.debug("Check element:" + element);
-    //       Assert.assertTrue(element.isEnabled());
-//        log.debug("Test finished");
-    // }
     public By getErrorMessage() {
         return errorMessage;
     }

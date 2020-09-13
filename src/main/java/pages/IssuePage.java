@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -22,12 +23,14 @@ public class IssuePage extends BasePage {
     private final By issueConfirmation = By.xpath("//span[@class='f1-light text-gray-light']");
     private final By menuLabel = By.id("labels-select-menu");
 
+    @Step("Navigate to Issue page")
     public void goToIssuesPage() {
         validateTrue(this.driver.findElement(tabsSearch));
         List<WebElement> elList = this.driver.findElements(tabsSearch);
         elList.get(1).click();
     }
 
+    @Step("Simple issue created Title={0}, Body={1}.")
     public void createIssue(String title, String body) {
         validateTrue(this.driver.findElement(issueButton));
         this.driver.findElement(issueButton).click();
@@ -39,6 +42,7 @@ public class IssuePage extends BasePage {
         this.driver.findElement(submitButton).click();
     }
 
+    @Step("Get Id of just created issue.")
     public int getCreatedIssueId() {
         validateTrue(this.driver.findElement(issueConfirmation));
         log.debug(this.driver.findElement(issueConfirmation).getText().replace("#", ""));
@@ -46,6 +50,7 @@ public class IssuePage extends BasePage {
 
     }
 
+    @Step("Check that issue #{0} has Title={1} and Body+{2}.")
     public void checkIssueById(int id, String title, String body) throws Exception {
         final By issueItem = By.xpath("//a[@id='issue_" + id + "_link']");
         final By issueTitle = By.xpath("//span[@class='js-issue-title']");
@@ -66,6 +71,7 @@ public class IssuePage extends BasePage {
 
     }
 
+    @Step("Create issue with labels.")
     public String createIssue(String title, String body, String label) {
 
         String[] labels = label.split(",");
@@ -79,16 +85,16 @@ public class IssuePage extends BasePage {
 
         this.driver.findElement(menuLabel).click();
         for (String s : labels) {
-        this.driver.findElement(By.id("label-filter-field")).sendKeys(s);
-        this.driver.findElement(By.xpath("//span[contains(text(),'" + s + "')]")).click();
-        this.driver.findElement(By.id("label-filter-field")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
-        this.driver.findElement(By.id("label-filter-field")).sendKeys(Keys.DELETE);
-    }
+            this.driver.findElement(By.id("label-filter-field")).sendKeys(s);
+            this.driver.findElement(By.xpath("//span[contains(text(),'" + s + "')]")).click();
+            this.driver.findElement(By.id("label-filter-field")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+            this.driver.findElement(By.id("label-filter-field")).sendKeys(Keys.DELETE);
+        }
         this.driver.findElement(menuLabel).click();
 
-    validateTrue(this.driver.findElement(submitButton));
+        validateTrue(this.driver.findElement(submitButton));
         this.driver.findElement(submitButton).click();
         return "ok";
-}
+    }
 
 }

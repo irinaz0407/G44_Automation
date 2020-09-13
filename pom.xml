@@ -10,13 +10,14 @@
 
     <properties>
         <aspectj.version>1.8.10</aspectj.version>
+
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <version>4.12</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -65,6 +66,11 @@
             <version>3.141.59</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
 
 
@@ -85,12 +91,19 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12.4</version>
                 <configuration>
-                    <testFailureIgnore>false</testFailureIgnore>
+                    <excludes>
+                        <exclude>**/FileTest.java</exclude>
+                        <exclude>**/Privat*.java</exclude>
+                        <exclude>**/EvaluationTest.java</exclude>
+                        <exclude>**/SystemPropertyTest.java</exclude>
+                    </excludes>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <systemPropertyVariables>
                         <allure.results>allure-results</allure.results>
+                        <useexcel>true</useexcel>
                     </systemPropertyVariables>
                     <properties>
                         <property>

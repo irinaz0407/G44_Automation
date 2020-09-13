@@ -1,5 +1,8 @@
 package tests.ui;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -49,7 +52,8 @@ public class SomeParamTest extends BaseTest {
     @Parameterized.Parameter(value = 2)
     public String testLabel;
 
-
+    @Description("Create Set of issues based on infromation from file")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void label() {
         String checkLabel;
@@ -59,7 +63,7 @@ public class SomeParamTest extends BaseTest {
             this.loginPage.login();
             fileHelper.addTestResult(dateFormat.format(Calendar.getInstance().getTime()), "Login to GIT", "Passed");
             sleep(1000);
-            this.searchPage.projectSearch();
+            this.searchPage.projectSearch("G44_Automation");
             fileHelper.addTestResult(dateFormat.format(Calendar.getInstance().getTime()), "Project search", "Passed");
             this.issuePage.goToIssuesPage();
             fileHelper.addTestResult(dateFormat.format(Calendar.getInstance().getTime()), "Issues page navigation", "Passed");

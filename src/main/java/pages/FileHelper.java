@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
@@ -23,10 +24,10 @@ public class FileHelper {
 
     private final static Logger log = LogManager.getLogger("File helper");
 
-
+    @Step("Read test data from file")
     public static Collection<String[]> readTestDataFromFile() {
         String filePath = getProperty("user.dir") + "\\src\\test\\java\\data\\";
-        Collection<String[]> result = new ArrayList();
+        Collection<String[]> result = new ArrayList<String[]>();
         try {
             if (!getProperty("useexcel").equals("true")) {
                 log.debug("Test data source is file");
@@ -65,6 +66,7 @@ public class FileHelper {
 
     private List<String[]> excelLog = new ArrayList<String[]>();
 
+    @Step("Add item to test log")
     public void addTestResult(String dateTime, String testName, String testResult) {
         String[] logRow = new String[3];
         logRow[0] = dateTime;
@@ -73,8 +75,9 @@ public class FileHelper {
         excelLog.add(logRow);
     }
 
+    @Step("Adding test log to excel file")
     public void addRowsToExcel() {
-        final DateFormat dateFormat = new SimpleDateFormat("yyyymmddhhmmss");
+        final DateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
 
         try {
             String filePath = getProperty("user.dir") + "\\src\\test\\java\\data\\";
