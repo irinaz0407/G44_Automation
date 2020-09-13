@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -96,5 +98,27 @@ public class IssuePage extends BasePage {
         this.driver.findElement(submitButton).click();
         return "ok";
     }
+    @Step("Delete issue by issue ID")
+    public void deleteIssue(int issueId){
+        final By issueItem = By.xpath("//a[@id='issue_" + issueId + "_link']");
+        final By deleteButton = By.xpath("//strong[contains(text(),'Delete issue')]");
+        final By confDeleteButton = By.xpath("//button[@name='verify_delete']");
 
+        this.driver.findElement(issueItem).click();
+        this.driver.findElement(deleteButton).click();
+        this.driver.findElement(confDeleteButton).click();
+    }
+
+    @Step("Delete visible issues")
+    public void deleteAllIssues(){
+        final By issueList = By.xpath("//a[contains(@id,'issue')]");
+        WebDriverWait wait = new WebDriverWait(this.driver,30);
+
+        for(WebElement wwe: this.driver.findElements(issueList)){
+            WebElement we = this.driver.findElement(issueList);
+            log.debug("Deleting "+ we.getAttribute("id"));
+            deleteIssue(Integer.parseInt(we.getAttribute("id").replace("issue_","").replace("_link","")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@id,'issue')]")));
+        }
+    }
 }
