@@ -9,7 +9,6 @@ import java.io.IOException;
 import static java.lang.System.getProperty;
 
 
-
 public class FileTest {
 
     private final Logger log = LogManager.getLogger();
