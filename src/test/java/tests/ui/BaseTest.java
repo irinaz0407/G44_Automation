@@ -25,7 +25,7 @@ public abstract class BaseTest {
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
                 System.getProperty("user.dir") +
-                        "\\src\\main\\resources\\drivers\\chrome\\v85\\chromedriver.exe");
+                        "D:\\autotest\\drivers\\chrome\\v85\\chromedriver.exe");
         switch (System.getProperty("browser", "chrome")) {
             case "chrome":
                 this.driver = new ChromeDriver();
