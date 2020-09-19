@@ -22,15 +22,15 @@ public class BasePage {
     public BasePage(WebDriver driver){
         this.driver = driver;
         changeLogger("Base page :");
-        connProps = new Properties();
-        try {
-            connProps.load(new FileInputStream(new File(System.getProperty("user.dir") +
-                    "\\src\\test\\resources\\connection.properties")));
-        } catch (IOException e) {
-            log.error(e);
-            connProps.setProperty("git.username","dummy");
-            connProps.setProperty("git.password","dummy");
-        }
+//        connProps = new Properties();
+//        try {
+//            connProps.load(new FileInputStream(new File(System.getProperty("user.dir") +
+//                    "\\src\\test\\resources\\connection.properties")));
+//        } catch (IOException e) {
+//            log.error(e);
+//            connProps.setProperty("git.username","dummy");
+//            connProps.setProperty("git.password","dummy");
+//        }
     }
     public void validateTrue(WebElement element) {
         log.debug("Check element:" + element);

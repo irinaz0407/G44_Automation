@@ -16,7 +16,8 @@ public class SearchPage extends BasePage {
     @Step("Selecting project {0}")
     public void projectSearch(String projectName) {
         final By searchInput = By.xpath("//input[contains(@class,'header-search-input')]");
-        final By userLink = By.partialLinkText(this.connProps.getProperty("git.username"));
+        final By userLink = By.partialLinkText(System.getProperty("userName"));
+        //final By userLink = By.partialLinkText(this.connProps.getProperty("git.username"));
         validateTrue(this.driver.findElement(searchInput));
         this.driver.findElement(searchInput).sendKeys(projectName);
         this.driver.findElement(searchInput).sendKeys(Keys.RETURN);

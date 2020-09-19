@@ -26,8 +26,12 @@ public class LoginPage extends BasePage {
         validateTrue(this.driver.findElement(usernameField));
         validateTrue(this.driver.findElement(passwordField));
         validateTrue(this.driver.findElement(signInButton));
-        this.login(this.connProps.getProperty("git.username"), this.connProps.getProperty("git.password"));
+
+        this.driver.findElement(usernameField).sendKeys(System.getProperty("userName"));
+        this.driver.findElement(passwordField).sendKeys(System.getProperty("password"));
+        this.driver.findElement(signInButton).click();
         validateTrue(this.driver.findElement(exitMenu));
+        //this.login(this.connProps.getProperty("git.username"), this.connProps.getProperty("git.password"));
         // validateTrue(this.driver.findElement(successHead));
 
     }
