@@ -55,7 +55,7 @@ public void callgetTimeIntervals(){
             .all(true)
             .body(matchesJsonSchema(
                     new File(getProperty("user.dir")
-                            + "\\src\\test\\resources\\getTimeInterval-schema.json")));
+                            + "/src/test/resources/getTimeInterval-schema.json")));
 }
 
     @Description("Test of getCargoTypes")
@@ -76,7 +76,7 @@ public void callgetTimeIntervals(){
                 .all(true)
                 .body(matchesJsonSchema(
                         new File(getProperty("user.dir")
-                                + "\\src\\test\\resources\\getCargoTypes-schema.json")));
+                                + "/src/test/resources/getCargoTypes-schema.json")));
     }
 }
 
