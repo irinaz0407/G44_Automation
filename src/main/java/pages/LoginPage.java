@@ -3,6 +3,8 @@ package pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
@@ -21,6 +23,7 @@ public class LoginPage extends BasePage {
 
     @Step("Check all elements on login page.")
     public void login() {
+        WebDriverWait wait = new WebDriverWait(this.driver,1);
 
 
         validateTrue(this.driver.findElement(usernameField));
@@ -30,6 +33,7 @@ public class LoginPage extends BasePage {
         this.driver.findElement(usernameField).sendKeys(System.getProperty("userName"));
         this.driver.findElement(passwordField).sendKeys(System.getProperty("password"));
         this.driver.findElement(signInButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(exitMenu));
         validateTrue(this.driver.findElement(exitMenu));
         //this.login(this.connProps.getProperty("git.username"), this.connProps.getProperty("git.password"));
         // validateTrue(this.driver.findElement(successHead));

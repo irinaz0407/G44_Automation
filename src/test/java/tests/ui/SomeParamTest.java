@@ -55,7 +55,7 @@ public class SomeParamTest extends BaseTest {
     @Description("Create Set of issues based on infromation from file")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    public void label() {
+    public void label() throws Exception {
         String checkLabel;
 
         try {
@@ -74,6 +74,7 @@ public class SomeParamTest extends BaseTest {
             log.debug("label() exception");
             fileHelper.addTestResult(dateFormat.format(Calendar.getInstance().getTime()), "Issues labels creation", "Failed");
             e.printStackTrace();
+            throw e;
 
         }
 

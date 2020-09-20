@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class IssuePage extends BasePage {
 
     public IssuePage(WebDriver driver) {
@@ -77,6 +79,8 @@ public class IssuePage extends BasePage {
     public String createIssue(String title, String body, String label) {
 
         String[] labels = label.split(",");
+        WebDriverWait wait = new WebDriverWait(this.driver,3);
+
 
         validateTrue(this.driver.findElement(issueButton));
         this.driver.findElement(issueButton).click();
@@ -89,9 +93,11 @@ public class IssuePage extends BasePage {
         log.debug("Navigated label-select-menu ");
 
         for (String s : labels) {
-            log.debug("Finding label "+s);
+            log.debug("Waiting for label "+s);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("label-filter-field")));
             this.driver.findElement(By.id("label-filter-field")).sendKeys(s);
             log.debug("Click on label "+s);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'" + s + "')]")));
             this.driver.findElement(By.xpath("//span[contains(text(),'" + s + "')]")).click();
             log.debug("Ctrl+A ");
             this.driver.findElement(By.id("label-filter-field")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
