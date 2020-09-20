@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,19 +24,28 @@ public abstract class BaseTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver",
-//                System.getProperty("user.dir") +
-                        "D:\\autotest\\drivers\\chrome\\v85\\chromedriver.exe");
+
         switch (System.getProperty("browser", "chrome")) {
             case "chrome":
+                System.setProperty("webdriver.chrome.driver",
+//                System.getProperty("user.dir") +
+                        "D:\\autotest\\drivers\\chrome\\v85\\chromedriver.exe");
                 this.driver = new ChromeDriver();
                 break;
-        }
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("https://github.com/login");
 
-    }
+            case "firefox":
+                System.setProperty("webdriver.gecko.driver",
+//                System.getProperty("user.dir") +
+                        "D:\\autotest\\drivers\\firefox\\v0.27.0\\geckodriver.exe");
+                this.driver = new FirefoxDriver();
+                break;
+
+            }
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            driver.get("https://github.com/login");
+
+        }
 
     @After
     public void ternDown(){
