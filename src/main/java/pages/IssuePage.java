@@ -86,12 +86,19 @@ public class IssuePage extends BasePage {
         this.driver.findElement(inputBody).sendKeys(body);
 
         this.driver.findElement(menuLabel).click();
+        log.debug("Navigated label-select-menu ");
+
         for (String s : labels) {
+            log.debug("Finding label "+s);
             this.driver.findElement(By.id("label-filter-field")).sendKeys(s);
+            log.debug("Click on label "+s);
             this.driver.findElement(By.xpath("//span[contains(text(),'" + s + "')]")).click();
+            log.debug("Ctrl+A ");
             this.driver.findElement(By.id("label-filter-field")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+            log.debug("Del ");
             this.driver.findElement(By.id("label-filter-field")).sendKeys(Keys.DELETE);
         }
+        log.debug("Closing labels menu");
         this.driver.findElement(menuLabel).click();
 
         validateTrue(this.driver.findElement(submitButton));
