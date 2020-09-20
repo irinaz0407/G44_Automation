@@ -71,8 +71,10 @@ public class SomeParamTest extends BaseTest {
             fileHelper.addTestResult(dateFormat.format(Calendar.getInstance().getTime()), "Issues labels creation", "Passed");
 
         } catch (Exception e) {
+            log.debug("label() exception");
             fileHelper.addTestResult(dateFormat.format(Calendar.getInstance().getTime()), "Issues labels creation", "Failed");
             e.printStackTrace();
+
         }
 
     }
@@ -84,6 +86,7 @@ public class SomeParamTest extends BaseTest {
             Assert.assertTrue(driver.getPageSource().contains(this.mainPage.getSignOutMessage()));
             fileHelper.addTestResult(dateFormat.format(Calendar.getInstance().getTime()), "Logoff", "Passed");
         } catch (Exception e) {
+            log.debug("Logoff from GIT exception");
             fileHelper.addTestResult(dateFormat.format(Calendar.getInstance().getTime()), "Logoff", "Failed");
         } finally {
             fileHelper.addRowsToExcel();
