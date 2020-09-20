@@ -25,10 +25,11 @@ public abstract class BaseTest {
     protected final Logger log = LogManager.getLogger("Test");
 
     protected WebDriver driver;
-    DesiredCapabilities capabilities = new DesiredCapabilities();
+
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        log.debug("Browser:"+System.getProperty("browser", "chrome"));
         if (System.getProperty("remote", "no").equals("no")) {
             switch (System.getProperty("browser", "chrome")) {
                 case "chrome":
@@ -47,27 +48,32 @@ public abstract class BaseTest {
 
             }
         }
-        else {
+        else if (System.getProperty("remote", "no").equals("yes")) {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
             switch (System.getProperty("browser", "chrome")) {
                 case "chrome":
                     capabilities.setBrowserName("chrome");
                     capabilities.setVersion("85.0");
+                    break;
                 case "firefox":
                     capabilities.setBrowserName("firefox");
                     capabilities.setVersion("80.0");
+                    break;
             }
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", false);
 
             try {
-                this.driver  = new RemoteWebDriver(
+                this.driver = new RemoteWebDriver(
                         URI.create("http://localhost:4444/wd/hub").toURL(),
                         capabilities);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-
         }
+        else
+            throw new Exception("No driver selected");
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://github.com/login");
