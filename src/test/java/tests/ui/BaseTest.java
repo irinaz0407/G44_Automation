@@ -65,7 +65,7 @@ public abstract class BaseTest {
 
             try {
                 this.driver = new RemoteWebDriver(
-                        URI.create("http://localhost:4444/wd/hub").toURL(),
+                        URI.create("http://192.168.0.113:4444/wd/hub").toURL(),
                         capabilities);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
