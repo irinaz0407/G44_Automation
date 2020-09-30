@@ -60,7 +60,7 @@ public abstract class BaseTest {
                     capabilities.setVersion("80.0");
                     break;
             }
-            capabilities.setCapability("enableVNC", false);
+            capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", false);
 
             try {
